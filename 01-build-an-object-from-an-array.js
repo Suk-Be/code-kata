@@ -52,6 +52,11 @@ const carData = {
       model: "sf90",
       year: 2021,
     },
+    {
+      brand: "Kia",
+      model: "sf90",
+      year: 2021,
+    },
   ],
 };
 
@@ -64,14 +69,13 @@ const carData = {
  * Implement the function
  **/
 
-// Implemented function
 function calculateCountByBrand(data) {
   let cars = {};
-  data.cars.forEach((item, i) => {
-    if (!(item.brand in cars)) {
-      cars[item.brand] = 1;
+  data.cars.forEach((element, i) => {
+    if (!(element.brand in cars)) {
+      cars[element.brand] = 1;
     } else {
-      cars[item.brand]++;
+      cars[element.brand]++;
     }
   });
   return cars;
