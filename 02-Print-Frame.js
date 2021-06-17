@@ -15,28 +15,35 @@ gets printed as:
 */
 
 const print = (data = "", symbol = "") => {
+  const space = " ";
   const words = data.split(" ");
 
   words.forEach((element, i) => {
     if (i < words.length) {
-      words[i] = symbol + " " + words[i] + " " + symbol;
+      words[i] = "\n" + " " + symbol + " " + words[i];
     }
   });
 
-  const longestWord = words.reduce((accumulator, currentVal) =>
-    accumulator.length > currentVal.length ? accumulator : currentVal
-  );
+  const getLongestWord = (words) =>
+    words.reduce((accumulator, currentVal) =>
+      accumulator.length > currentVal.length ? accumulator : currentVal
+    );
+
+  const longestWord = getLongestWord(words);
 
   const check = (longestWord, words) => {
-    //console.log(symbol);
-    console.log(words);
-    console.log(longestWord, longestWord.length);
-
-    words.forEach((word, i) => {
+    words.forEach((word, index) => {
       if (word.length < longestWord.length) {
-        console.log(word, word.length);
+        words[index] =
+          `${words[index]}` +
+          `${space.repeat(longestWord.length - word.length)}`;
       }
+      words[index] = `${words[index]} ${symbol}`;
     });
+    const repeatLength = getLongestWord(words).length - 2;
+    const symbolrow = "\n" + " " + symbol.repeat(repeatLength);
+    console.log(words.unshift(symbolrow));
+    console.log(words.push(symbolrow));
     console.log(words.join(" "));
   };
 
@@ -44,5 +51,5 @@ const print = (data = "", symbol = "") => {
 };
 
 const symbol = "*";
-const sentence = "Hello world in a frame";
+const sentence = "Hello worldia in a frame";
 print(sentence, symbol);
